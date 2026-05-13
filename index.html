@@ -569,47 +569,21 @@
         </div>
       </div>
 
-      <!-- SECTION 4: DOCUMENTS -->
+      <!-- SECTION 4: NOTES -->
       <div class="section">
-        <div class="section-title"><span class="section-num">4</span> Dokumen Sokongan (Quotation / Sebut Harga)</div>
-        <p class="hint" style="margin-bottom:14px;">Sila sertakan quotation atau sebut harga daripada syarikat. Pilih salah satu cara di bawah:</p>
-
-        <div class="upload-options">
-          <div class="upload-option" id="opt-link" onclick="selectUploadOpt('link')">
-            <div class="upload-icon">🔗</div>
-            <div class="upload-title">Kongsi Link</div>
-            <div class="upload-sub">Google Drive, Dropbox, dll</div>
-          </div>
-          <div class="upload-option" id="opt-file" onclick="selectUploadOpt('file')">
-            <div class="upload-icon">📄</div>
-            <div class="upload-title">Upload PDF / Gambar</div>
-            <div class="upload-sub">Quotation atau sebut harga</div>
-          </div>
-        </div>
-
-        <div class="link-input-wrap" id="linkWrap">
-          <div class="field">
-            <label>Link Dokumen</label>
-            <input type="url" id="docLink" placeholder="https://drive.google.com/...">
-            <span class="hint">Pastikan link boleh diakses oleh sesiapa sahaja</span>
-          </div>
-        </div>
-
-        <div class="file-input-wrap" id="fileWrap">
-          <div class="field">
-            <label>Upload Fail</label>
-            <input type="file" id="docFile" accept=".pdf,image/*" style="display:block; padding:8px; border:1.5px solid var(--border); border-radius:10px; font-size:13px;">
-            <span class="hint">Format: PDF, JPG, PNG (maks 10MB)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 5: NOTES -->
-      <div class="section">
-        <div class="section-title"><span class="section-num">5</span> Maklumat Tambahan</div>
+        <div class="section-title"><span class="section-num">4</span> Maklumat Tambahan</div>
         <div class="field">
           <label>Nota / Keterangan Lanjut (jika ada)</label>
           <textarea id="notes" placeholder="cth: Anak saya memerlukan aksesori ini dengan segera kerana..."></textarea>
+        </div>
+      </div>
+
+      <!-- WHATSAPP DOC NOTICE -->
+      <div style="background:#e0f2fe; border: 1.5px solid #7dd3fc; border-radius:12px; padding:16px 18px; margin-bottom:16px; display:flex; gap:12px; align-items:flex-start;">
+        <span style="font-size:22px; flex-shrink:0;">💬</span>
+        <div>
+          <p style="font-size:13.5px; font-weight:600; color:#0369a1; margin-bottom:4px;">Dokumen Sokongan (Quotation / Sebut Harga)</p>
+          <p style="font-size:13px; color:#0c4a6e; line-height:1.6;">Selepas menghantar borang ini, anda akan diarahkan ke <strong>WhatsApp admin</strong> secara automatik. Sila <strong>attach quotation / sebut harga</strong> anda terus dalam WhatsApp tersebut.</p>
         </div>
       </div>
 
@@ -719,7 +693,7 @@
       deviceType:  document.getElementById('deviceType').value.trim(),
       items:       itemsList.join(' | '),
       total:       document.getElementById('totalAmount').textContent.replace('RM ', ''),
-      docLink:     document.getElementById('docLink').value.trim(),
+      docLink:     '-',
       notes:       document.getElementById('notes').value.trim(),
     };
 
