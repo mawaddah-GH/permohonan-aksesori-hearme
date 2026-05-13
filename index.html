@@ -482,6 +482,8 @@
       <div class="success-icon">✅</div>
       <h2>Terima Kasih!</h2>
       <p>Permohonan anda telah berjaya dihantar.<br>Kami akan menghubungi anda sekiranya permohonan berjaya.<br><br><em>Ingat: Kelulusan bergantung kepada funder.</em></p>
+      <p style="margin-top:16px; font-size:13px; color:#0369a1;">WhatsApp akan dibuka automatik. Jika tidak, klik butang di bawah:</p>
+      <a id="waBtn" href="#" target="_blank" style="display:inline-block; margin-top:14px; background:linear-gradient(135deg,#0369a1,#0d9488); color:white; padding:13px 28px; border-radius:12px; text-decoration:none; font-weight:600; font-size:14px;">💬 Hantar ke WhatsApp Admin</a>
     </div>
 
     <div class="form-content" id="formContent">
@@ -732,17 +734,44 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
-    .then(() => {
-      document.getElementById('formContent').classList.add('hide');
-      document.getElementById('successScreen').classList.add('show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    })
-    .catch(() => {
-      // no-cors won't throw, but just in case
-      document.getElementById('formContent').classList.add('hide');
-      document.getElementById('successScreen').classList.add('show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    .then(() => showSuccessAndWhatsApp(payload))
+    .catch(() => showSuccessAndWhatsApp(payload));
+  }
+
+  function showSuccessAndWhatsApp(payload) {
+    document.getElementById('formContent').classList.add('hide');
+    document.getElementById('successScreen').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const itemLines = payload.items.split(' | ').map(i => '• ' + i).join('\n');
+
+    const msg =
+`🦻 *PERMOHONAN BANTUAN AKSESORI*
+
+👤 *Ibu Bapa:* ${payload.parentName}
+📞 *Tel:* ${payload.parentPhone}
+📧 *E-mel:* ${payload.parentEmail || '-'}
+
+👧 *Nama Anak:* ${payload.childName}
+🎂 *Umur:* ${payload.childAge} tahun
+🔧 *Peranti:* ${payload.deviceType}
+
+📋 *Item Dipohon:*
+${itemLines}
+
+💰 *Jumlah Anggaran:* RM ${payload.total}
+🔗 *Link Dokumen:* ${payload.docLink || '-'}
+
+📝 *Nota:* ${payload.notes || '-'}`;
+
+    const waURL = 'https://wa.me/60197575364?text=' + encodeURIComponent(msg);
+
+    // Set butang link
+    document.getElementById('waBtn').href = waURL;
+
+    setTimeout(() => {
+      window.open(waURL, '_blank');
+    }, 1500);
   }
 </script>
 </body>
